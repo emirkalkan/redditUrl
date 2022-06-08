@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
         navigationController?.navigationItem.backButtonTitle = "\(backButtonTitle)"
         setViews()
         customizeViews()
-        get()
+        //get()
     }
     
     // MARK: - Functions
@@ -83,7 +83,7 @@ class DetailsViewController: UIViewController {
         detailName.text = "name"
         detailScore.text = "11"
     }
-    
+    /*
     func get() {
         let url = URL(string: "https://www.reddit.com/r/soccer/top.json")
         URLSession.shared.dataTask(with: URL(string: "https://www.reddit.com/r/soccer/top.json")!, completionHandler: { data, response, error in
@@ -91,10 +91,10 @@ class DetailsViewController: UIViewController {
             guard let data = data, error == nil else { return }
             
             //convert
-            var result: Photo?
+            var result: Model?
             
             do{
-                result = try JSONDecoder().decode(Photo.self, from: data)
+                result = try JSONDecoder().decode(Model.self, from: data)
             } catch {
                 print("error")
             }
@@ -107,8 +107,7 @@ class DetailsViewController: UIViewController {
                     self.posterImageView.image = UIImage(data: data)
                 }*/
             }*/
+            //print(finalResult.data[0].)
         }).resume()
-    }
-    
-    
+    }*/
 }

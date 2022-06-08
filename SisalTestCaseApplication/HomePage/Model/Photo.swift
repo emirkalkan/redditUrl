@@ -7,16 +7,16 @@ import Foundation
 
 // MARK: - Photo
 struct Photo: Codable {
-    let kind: String?
-    let data: PhotoData?
+    let kind: String
+    let data: PhotoData
 }
 
 // MARK: - PhotoData
 struct PhotoData: Codable {
-    let after: JSONNull?
-    let dist: Int?
-    let modhash, geoFilter: String?
-    let children: [Child]?
+    let after: String
+    let dist: Int
+    let modhash, geoFilter: String
+    let children: [Child]
     let before: JSONNull?
 
     enum CodingKeys: String, CodingKey {
@@ -28,97 +28,101 @@ struct PhotoData: Codable {
 
 // MARK: - Child
 struct Child: Codable {
-    let kind: String?
-    let data: ChildData?
+    let kind: Kind
+    let data: ChildData
 }
 
 // MARK: - ChildData
 struct ChildData: Codable {
     let approvedAtUTC: JSONNull?
-    let subreddit, selftext, authorFullname: String?
-    let saved: Bool?
+    let subreddit: Subreddit
+    let selftext, authorFullname: String
+    let saved: Bool
     let modReasonTitle: JSONNull?
-    let gilded: Int?
-    let clicked: Bool?
-    let title: String?
-    let linkFlairRichtext: [JSONAny]?
-    let subredditNamePrefixed: String?
-    let hidden: Bool?
-    let pwls: Int?
-    let linkFlairCSSClass: String?
-    let downs, thumbnailHeight: Int?
+    let gilded: Int
+    let clicked: Bool
+    let title: String
+    let linkFlairRichtext: [FlairRichtext]
+    let subredditNamePrefixed: SubredditNamePrefixed
+    let hidden: Bool
+    let pwls: Int
+    let linkFlairCSSClass: String
+    let downs: Int
     let topAwardedType: JSONNull?
-    let hideScore: Bool?
-    let name: String?
-    let quarantine: Bool?
-    let linkFlairTextColor: String?
-    let upvoteRatio: Double?
-    let authorFlairBackgroundColor: JSONNull?
-    let subredditType: String?
-    let ups, totalAwardsReceived: Int?
-    let mediaEmbed: MediaEmbed?
-    let thumbnailWidth: Int?
-    let authorFlairTemplateID: JSONNull?
-    let isOriginalContent: Bool?
-    let userReports: [JSONAny]?
+    let hideScore: Bool
+    let name: String
+    let quarantine: Bool
+    let linkFlairTextColor: FlairTextColor
+    let upvoteRatio: Double
+    let authorFlairBackgroundColor: AuthorFlairBackgroundColor?
+    let subredditType: SubredditType
+    let ups, totalAwardsReceived: Int
+    let mediaEmbed: MediaEmbed
+    let authorFlairTemplateID: String?
+    let isOriginalContent: Bool
+    let userReports: [JSONAny]
     let secureMedia: Media?
-    let isRedditMediaDomain, isMeta: Bool?
+    let isRedditMediaDomain, isMeta: Bool
     let category: JSONNull?
-    let secureMediaEmbed: MediaEmbed?
-    let linkFlairText: String?
-    let canModPost: Bool?
-    let score: Int?
+    let secureMediaEmbed: MediaEmbed
+    let linkFlairText: String
+    let canModPost: Bool
+    let score: Int
     let approvedBy: JSONNull?
-    let isCreatedFromAdsUI, authorPremium: Bool?
-    let thumbnail: String?
-    let edited: Bool?
-    let authorFlairCSSClass: JSONNull?
-    let authorFlairRichtext: [JSONAny]?
-    let gildings: Gildings?
-    let postHint: String?
+    let isCreatedFromAdsUI, authorPremium: Bool
+    let thumbnail: String
+    let edited: Bool
+    let authorFlairCSSClass: String?
+    let authorFlairRichtext: [FlairRichtext]
+    let gildings: Gildings
     let contentCategories: JSONNull?
-    let isSelf: Bool?
+    let isSelf: Bool
     let modNote: JSONNull?
-    let created: Int?
-    let linkFlairType: String?
-    let wls: Int?
+    let created: Int
+    let linkFlairType: FlairType
+    let wls: Int
     let removedByCategory, bannedBy: JSONNull?
-    let authorFlairType, domain: String?
-    let allowLiveComments: Bool?
+    let authorFlairType: FlairType
+    let domain: String
+    let allowLiveComments: Bool
     let selftextHTML, likes, suggestedSort, bannedAtUTC: JSONNull?
-    let urlOverriddenByDest: String?
+    let urlOverriddenByDest: String
     let viewCount: JSONNull?
-    let archived, noFollow, isCrosspostable, pinned: Bool?
-    let over18: Bool?
-    let preview: Preview?
-    let allAwardings, awarders: [JSONAny]?
-    let mediaOnly, canGild, spoiler, locked: Bool?
-    let authorFlairText: JSONNull?
-    let treatmentTags: [JSONAny]?
-    let visited: Bool?
+    let archived, noFollow, isCrosspostable, pinned: Bool
+    let over18: Bool
+    let allAwardings, awarders: [JSONAny]
+    let mediaOnly: Bool
+    let linkFlairTemplateID: String
+    let canGild, spoiler, locked: Bool
+    let authorFlairText: String?
+    let treatmentTags: [JSONAny]
+    let visited: Bool
     let removedBy, numReports, distinguished: JSONNull?
-    let subredditID: String?
-    let authorIsBlocked: Bool?
+    let subredditID: SubredditID
+    let authorIsBlocked: Bool
     let modReasonBy, removalReason: JSONNull?
-    let linkFlairBackgroundColor, id: String?
-    let isRobotIndexable: Bool?
+    let linkFlairBackgroundColor, id: String
+    let isRobotIndexable: Bool
     let reportReasons: JSONNull?
-    let author: String?
+    let author: String
     let discussionType: JSONNull?
-    let numComments: Int?
-    let sendReplies: Bool?
-    let whitelistStatus: String?
-    let contestMode: Bool?
-    let modReports: [JSONAny]?
-    let authorPatreonFlair: Bool?
-    let authorFlairTextColor: JSONNull?
-    let permalink, parentWhitelistStatus: String?
-    let stickied: Bool?
-    let url: String?
-    let subredditSubscribers, createdUTC, numCrossposts: Int?
+    let numComments: Int
+    let sendReplies: Bool
+    let whitelistStatus: WhitelistStatus
+    let contestMode: Bool
+    let modReports: [JSONAny]
+    let authorPatreonFlair: Bool
+    let authorFlairTextColor: FlairTextColor?
+    let permalink: String
+    let parentWhitelistStatus: WhitelistStatus
+    let stickied: Bool
+    let url: String
+    let subredditSubscribers, createdUTC, numCrossposts: Int
     let media: Media?
-    let isVideo: Bool?
-    let linkFlairTemplateID: String?
+    let isVideo: Bool
+    let isGallery: Bool?
+    let mediaMetadata: [String: MediaMetadatum]?
+    let galleryData: GalleryData?
 
     enum CodingKeys: String, CodingKey {
         case approvedAtUTC = "approved_at_utc"
@@ -132,7 +136,6 @@ struct ChildData: Codable {
         case hidden, pwls
         case linkFlairCSSClass = "link_flair_css_class"
         case downs
-        case thumbnailHeight = "thumbnail_height"
         case topAwardedType = "top_awarded_type"
         case hideScore = "hide_score"
         case name, quarantine
@@ -143,7 +146,6 @@ struct ChildData: Codable {
         case ups
         case totalAwardsReceived = "total_awards_received"
         case mediaEmbed = "media_embed"
-        case thumbnailWidth = "thumbnail_width"
         case authorFlairTemplateID = "author_flair_template_id"
         case isOriginalContent = "is_original_content"
         case userReports = "user_reports"
@@ -162,7 +164,6 @@ struct ChildData: Codable {
         case authorFlairCSSClass = "author_flair_css_class"
         case authorFlairRichtext = "author_flair_richtext"
         case gildings
-        case postHint = "post_hint"
         case contentCategories = "content_categories"
         case isSelf = "is_self"
         case modNote = "mod_note"
@@ -185,10 +186,10 @@ struct ChildData: Codable {
         case isCrosspostable = "is_crosspostable"
         case pinned
         case over18 = "over_18"
-        case preview
         case allAwardings = "all_awardings"
         case awarders
         case mediaOnly = "media_only"
+        case linkFlairTemplateID = "link_flair_template_id"
         case canGild = "can_gild"
         case spoiler, locked
         case authorFlairText = "author_flair_text"
@@ -222,7 +223,53 @@ struct ChildData: Codable {
         case numCrossposts = "num_crossposts"
         case media
         case isVideo = "is_video"
-        case linkFlairTemplateID = "link_flair_template_id"
+        case isGallery = "is_gallery"
+        case mediaMetadata = "media_metadata"
+        case galleryData = "gallery_data"
+    }
+}
+
+enum AuthorFlairBackgroundColor: String, Codable {
+    case empty = ""
+    case transparent = "transparent"
+}
+
+// MARK: - FlairRichtext
+struct FlairRichtext: Codable {
+    let a: String?
+    let e: E
+    let u: String?
+    let t: String?
+}
+
+enum E: String, Codable {
+    case emoji = "emoji"
+    case text = "text"
+}
+
+enum FlairTextColor: String, Codable {
+    case dark = "dark"
+    case light = "light"
+}
+
+enum FlairType: String, Codable {
+    case richtext = "richtext"
+    case text = "text"
+}
+
+// MARK: - GalleryData
+struct GalleryData: Codable {
+    let items: [Item]
+}
+
+// MARK: - Item
+struct Item: Codable {
+    let mediaID: String
+    let id: Int
+
+    enum CodingKeys: String, CodingKey {
+        case mediaID = "media_id"
+        case id
     }
 }
 
@@ -232,34 +279,75 @@ struct Gildings: Codable {
 
 // MARK: - Media
 struct Media: Codable {
-    let type: String?
     let oembed: Oembed?
+    let type: MediaType?
+    let redditVideo: RedditVideo?
+
+    enum CodingKeys: String, CodingKey {
+        case oembed, type
+        case redditVideo = "reddit_video"
+    }
 }
 
 // MARK: - Oembed
 struct Oembed: Codable {
-    let providerURL: String?
-    let version: String?
-    let url: String?
-    let authorName: String?
+    let providerURL, url: String
+    let html, authorName: String
     let height: JSONNull?
-    let width: Int?
-    let html: String?
-    let authorURL: String?
-    let providerName: String?
-    let cacheAge: Int?
-    let type: String?
+    let width: Int
+    let version: String
+    let authorURL: String
+    let providerName: ProviderName
+    let cacheAge: Int
+    let type: OembedType
 
     enum CodingKeys: String, CodingKey {
         case providerURL = "provider_url"
-        case version, url
+        case url, html
         case authorName = "author_name"
-        case height, width, html
+        case height, width, version
         case authorURL = "author_url"
         case providerName = "provider_name"
         case cacheAge = "cache_age"
         case type
     }
+}
+
+enum ProviderName: String, Codable {
+    case twitter = "Twitter"
+}
+
+enum OembedType: String, Codable {
+    case rich = "rich"
+}
+
+// MARK: - RedditVideo
+struct RedditVideo: Codable {
+    let bitrateKbps: Int
+    let fallbackURL: String
+    let height, width: Int
+    let scrubberMediaURL: String
+    let dashURL: String
+    let duration: Int
+    let hlsURL: String
+    let isGIF: Bool
+    let transcodingStatus: String
+
+    enum CodingKeys: String, CodingKey {
+        case bitrateKbps = "bitrate_kbps"
+        case fallbackURL = "fallback_url"
+        case height, width
+        case scrubberMediaURL = "scrubber_media_url"
+        case dashURL = "dash_url"
+        case duration
+        case hlsURL = "hls_url"
+        case isGIF = "is_gif"
+        case transcodingStatus = "transcoding_status"
+    }
+}
+
+enum MediaType: String, Codable {
+    case twitterCOM = "twitter.com"
 }
 
 // MARK: - MediaEmbed
@@ -276,24 +364,42 @@ struct MediaEmbed: Codable {
     }
 }
 
-// MARK: - Preview
-struct Preview: Codable {
-    let images: [Image]?
-    let enabled: Bool?
+// MARK: - MediaMetadatum
+struct MediaMetadatum: Codable {
+    let status, e, m: String
+    let p: [S]
+    let s: S
+    let id: String
 }
 
-// MARK: - Image
-struct Image: Codable {
-    let source: Source?
-    let resolutions: [Source]?
-    let variants: Gildings?
-    let id: String?
+// MARK: - S
+struct S: Codable {
+    let y, x: Int
+    let u: String
 }
 
-// MARK: - Source
-struct Source: Codable {
-    let url: String?
-    let width, height: Int?
+enum WhitelistStatus: String, Codable {
+    case allAds = "all_ads"
+}
+
+enum Subreddit: String, Codable {
+    case soccer = "soccer"
+}
+
+enum SubredditID: String, Codable {
+    case t52Qi58 = "t5_2qi58"
+}
+
+enum SubredditNamePrefixed: String, Codable {
+    case rSoccer = "r/soccer"
+}
+
+enum SubredditType: String, Codable {
+    case subredditTypePublic = "public"
+}
+
+enum Kind: String, Codable {
+    case t3 = "t3"
 }
 
 // MARK: - Encode/decode helpers

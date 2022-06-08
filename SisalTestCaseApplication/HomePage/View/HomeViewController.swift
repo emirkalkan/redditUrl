@@ -24,6 +24,14 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDele
         setViews()
         customizeViews()
         setupTableView()
+        
+        //api request
+        let url = URL(string: "\(Constants.baseUrl)soccer\(Constants.endpoint)")
+        WebService().getDatas(url: url!) { (photos) in
+            if let photos = photos {
+                print(photos)
+            }
+        }
     }
     
     // MARK: - Functions
