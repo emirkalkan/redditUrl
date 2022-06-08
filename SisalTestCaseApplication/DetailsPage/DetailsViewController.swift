@@ -17,17 +17,23 @@ class DetailsViewController: UIViewController {
     private var detailScore = UILabel()
     private var detailImage = UIImageView()
     
+    private var detailTitleLabel = UILabel()
+    private var detailAuthLabel = UILabel()
+    private var detailNameLabel = UILabel()
+    private var detailScoreLabel = UILabel()
     
     // MARK: - Passing Values
-    var backButtonTitle: String = ""
+    var passedTitle: String = ""
+    var passedAuth: String = ""
+    var passedScore: Int = 0 
+    var passedImage: String = ""
+    var passedName: String = ""
     
-
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationItem.backButtonTitle = "\(backButtonTitle)"
         setViews()
         customizeViews()
-        //get()
     }
     
     // MARK: - Functions
@@ -37,77 +43,72 @@ class DetailsViewController: UIViewController {
         self.view.addSubview(detailName)
         self.view.addSubview(detailScore)
         self.view.addSubview(detailImage)
+        self.view.addSubview(detailTitleLabel)
+        self.view.addSubview(detailNameLabel)
+        self.view.addSubview(detailScoreLabel)
+        self.view.addSubview(detailAuthLabel)
         
         detailImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.height.equalTo(300)
-            make.width.equalTo(200)
+            make.height.equalTo(200)
+            make.width.equalTo(300)
             make.centerX.equalToSuperview()
         }
         
-        detailTitle.snp.makeConstraints { make in
-            make.top.equalTo(detailImage.snp.bottom).offset(40)
-            make.left.equalToSuperview().offset(140)
+        detailTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(detailImage.snp.bottom).offset(50)
+            make.left.equalToSuperview().offset(30)
             //make.height.equalTo(40)
         }
         
-        detailAuth.snp.makeConstraints { make in
-            make.top.equalTo(detailImage.snp.bottom).offset(40)
-            make.left.equalTo(detailTitle.snp.right).offset(30)
-            
-            
-            //make.centerX.equalTo(detailTitle)
-            //make.right.equalToSuperview().offset(-5)
-            //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+        detailTitle.snp.makeConstraints { make in
+            make.top.equalTo(detailImage.snp.bottom).offset(50)
+            make.left.equalTo(detailTitleLabel.snp.right).offset(5)
+            //make.right.equalToSuperview().offset(-10)
+            make.width.equalTo(200)
+        }
+       
+        detailNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(detailTitleLabel.snp.bottom).offset(50)
+            make.left.equalToSuperview().offset(30)
         }
         
         detailName.snp.makeConstraints { make in
-            make.top.equalTo(detailTitle.snp.bottom).offset(50)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(detailTitleLabel.snp.bottom).offset(50)
+            make.left.equalTo(detailNameLabel.snp.right).offset(10)
+        }
+        
+        detailScoreLabel.snp.makeConstraints { make in
+            make.top.equalTo(detailNameLabel.snp.bottom).offset(50)
+            make.left.equalToSuperview().offset(30)
         }
         
         detailScore.snp.makeConstraints { make in
-            make.top.equalTo(detailName.snp.bottom).offset(80)
-            make.centerX.equalToSuperview()
-            //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
+            make.top.equalTo(detailNameLabel.snp.bottom).offset(50)
+            make.left.equalTo(detailScoreLabel.snp.right).offset(10)
         }
     }
     
     private func customizeViews() {
+        detailNameLabel.text = "Name:"
+        detailTitleLabel.text = "Title:"
+        detailScoreLabel.text = "Score:"
+        
         //view
         view.backgroundColor = .white
-        detailImage.backgroundColor = .red
+        detailTitle.numberOfLines = 0
         
-        detailTitle.text = "title"
-        detailAuth.text = "auth"
-        detailName.text = "name"
-        detailScore.text = "11"
-    }
-    /*
-    func get() {
-        let url = URL(string: "https://www.reddit.com/r/soccer/top.json")
-        URLSession.shared.dataTask(with: URL(string: "https://www.reddit.com/r/soccer/top.json")!, completionHandler: { data, response, error in
-            
-            guard let data = data, error == nil else { return }
-            
-            //convert
-            var result: Model?
-            
-            do{
-                result = try JSONDecoder().decode(Model.self, from: data)
-            } catch {
-                print("error")
+        let url = passedImage
+
+        if url == "" {
+            detailImage.image = UIImage(named: "notFound.png")
+        } else {
+            if let data = try? Data(contentsOf: URL(string: url)!) {
+                detailImage.image = UIImage(data: data)
             }
-            
-            guard let finalResult = result else { return }
-            /*
-            DispatchQueue.main.async {
-                let url = finalResult.Poster
-                /*if let data = try? Data(contentsOf: URL(string: url)!) {
-                    self.posterImageView.image = UIImage(data: data)
-                }*/
-            }*/
-            //print(finalResult.data[0].)
-        }).resume()
-    }*/
+        }
+        detailTitle.text = passedTitle
+        detailName.text = passedName
+        detailScore.text = String(passedScore)
+    }
 }

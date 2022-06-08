@@ -8,15 +8,44 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewModelProtocol {
+    func updateList() {
+        homeTableView.reloadData()
+    }
+    func navigateToDetailVC(vc: UIViewController) {
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func showToast(message:String,font:UIFont, width: Int, height: Int){
+        let toastLabel = UILabel()
+        toastLabel.backgroundColor = UIColor(red:0.30, green:0.30, blue:0.30, alpha:1.0)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        toastLabel.alpha = 1
+        toastLabel.layer.cornerRadius = 18
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.view)
+            make.centerX.equalTo(self.view)
+            make.height.equalTo(height)
+            make.width.equalTo(width)
+        }
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
     
     // MARK: - UI Elements
     private var homeTitle = UILabel()
     private var homeSearchBar = UISearchBar()
     private var homeTableView = UITableView()
     
-    var items: [String] = ["1", "2", "3","1", "2", "3","1", "2", "3","1", "2", "3","1", "2", "3"]
-    var logoImages: [UIImage] = [UIImage(named: "avengers.jpeg")!, UIImage(named: "avengers.jpeg")!, UIImage(named: "avengers.jpeg")!, UIImage(named: "avengers.jpeg")!]
+    private var homeViewModel = HomeViewModel()
+    
+    let webService = WebService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +53,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDele
         setViews()
         customizeViews()
         setupTableView()
-        
-        //api request
-        let url = URL(string: "\(Constants.baseUrl)soccer\(Constants.endpoint)")
-        WebService().getDatas(url: url!) { (photos) in
-            if let photos = photos {
-                print(photos)
-            }
-        }
     }
     
     // MARK: - Functions
@@ -39,13 +60,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDele
         self.view.addSubview(homeTitle)
         self.view.addSubview(homeSearchBar)
         self.view.addSubview(homeTableView)
-        /*
-        homeTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.right.equalToSuperview().offset(10)
-            make.centerX.equalToSuperview()
-        }*/
         
         homeSearchBar.snp.makeConstraints { make in
             //make.top.equalTo(homeTitle.snp.bottom).offset(300)
@@ -70,92 +84,18 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UITableViewDele
         homeTitle.text = "Photos Application"
         
         homeSearchBar.placeholder = "Search Photos"
-        homeSearchBar.delegate = self
+        homeSearchBar.delegate = homeViewModel
+        homeSearchBar.autocapitalizationType = .none
         
     }
     
     private func setupTableView() {
         
         //tableview
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
+        homeTableView.delegate = homeViewModel
+        homeTableView.dataSource = homeViewModel
+        homeViewModel.delegate = self
         homeTableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.cellId)
         self.view.addSubview(homeTableView)
-        
-        /*homeTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view.safeAreaLayoutGuide)
-        }*/
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 220
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return logoImages.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.cellId, for: indexPath) as! CustomCell
-            //cell.lblTitle.text = items[indexPath.row]
-            cell.photo.image = logoImages[indexPath.row]
-            return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        //Show photo details
-        let vc = DetailsViewController()
-        vc.backButtonTitle = "backk"
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-class CustomCell: UITableViewCell {
-    
-    static var cellId = "cell"
-
-    let lblTitle: UILabel = {
-        let v = UILabel()
-        //v.backgroundColor = .systemGreen
-        v.textColor = .black
-        //v.textAlignment = .center
-        v.layer.cornerRadius = 5
-        v.layer.masksToBounds = true
-        return v
-    }()
-    
-    let photo: UIImageView = {
-      let i = UIImageView()
-      return i
-    }()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func setupUI() {
-        self.addSubview(lblTitle)
-        self.addSubview(photo)
-        /*
-        lblTitle.snp.makeConstraints { (make) in
-            make.top.leading.equalTo(20)
-            make.trailing.bottom.equalTo(-20)
-        }*/
-        
-        photo.snp.makeConstraints { make in
-            //make.top.equalTo(lblTitle.snp.bottom).offset(20)
-            make.top.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-20)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.width.equalTo(300)
-            make.height.equalTo(200)
-        }
     }
 }

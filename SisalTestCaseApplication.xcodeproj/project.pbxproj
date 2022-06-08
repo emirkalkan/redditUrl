@@ -19,9 +19,12 @@
 		843904E3284F9F15000CE8F7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904E2284F9F15000CE8F7 /* HomeViewController.swift */; };
 		843904E5284FEBCD000CE8F7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904E4284FEBCD000CE8F7 /* DetailsViewController.swift */; };
 		843904E7285007F4000CE8F7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904E6285007F4000CE8F7 /* Photo.swift */; };
-		843904E9285014FC000CE8F7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904E8285014FC000CE8F7 /* Model.swift */; };
+		843904E9285014FC000CE8F7 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904E8285014FC000CE8F7 /* ErrorModel.swift */; };
 		843904EC2850D0FD000CE8F7 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904EB2850D0FD000CE8F7 /* WebService.swift */; };
 		843904F228510559000CE8F7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904F128510559000CE8F7 /* Constants.swift */; };
+		843904F7285120B4000CE8F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904F6285120B4000CE8F7 /* HomeViewModel.swift */; };
+		843904F928512CFD000CE8F7 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904F828512CFD000CE8F7 /* CustomCell.swift */; };
+		843904FD28513111000CE8F7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843904FC28513111000CE8F7 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +60,12 @@
 		843904E2284F9F15000CE8F7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		843904E4284FEBCD000CE8F7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		843904E6285007F4000CE8F7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		843904E8285014FC000CE8F7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		843904E8285014FC000CE8F7 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		843904EB2850D0FD000CE8F7 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		843904F128510559000CE8F7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		843904F6285120B4000CE8F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		843904F828512CFD000CE8F7 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		843904FC28513111000CE8F7 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,9 @@
 		843904E0284F9B54000CE8F7 /* DetailsPage */ = {
 			isa = PBXGroup;
 			children = (
+				843904F5285110F0000CE8F7 /* ViewModel */,
+				843904F4285110EA000CE8F7 /* Vİew */,
+				843904F3285110DF000CE8F7 /* Model */,
 				843904E4284FEBCD000CE8F7 /* DetailsViewController.swift */,
 			);
 			path = DetailsPage;
@@ -179,7 +188,7 @@
 		843904ED285104D7000CE8F7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				843904E8285014FC000CE8F7 /* Model.swift */,
+				843904E8285014FC000CE8F7 /* ErrorModel.swift */,
 				843904E6285007F4000CE8F7 /* Photo.swift */,
 			);
 			path = Model;
@@ -189,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				843904E2284F9F15000CE8F7 /* HomeViewController.swift */,
+				843904F828512CFD000CE8F7 /* CustomCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,6 +206,7 @@
 		843904EF285104E1000CE8F7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				843904F6285120B4000CE8F7 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -204,8 +215,31 @@
 			isa = PBXGroup;
 			children = (
 				843904F128510559000CE8F7 /* Constants.swift */,
+				843904FC28513111000CE8F7 /* Helper.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		843904F3285110DF000CE8F7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		843904F4285110EA000CE8F7 /* Vİew */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Vİew";
+			path = "Vİew";
+			sourceTree = "<group>";
+		};
+		843904F5285110F0000CE8F7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,15 +378,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843904E9285014FC000CE8F7 /* Model.swift in Sources */,
+				843904E9285014FC000CE8F7 /* ErrorModel.swift in Sources */,
 				843904E7285007F4000CE8F7 /* Photo.swift in Sources */,
+				843904F928512CFD000CE8F7 /* CustomCell.swift in Sources */,
 				843904EC2850D0FD000CE8F7 /* WebService.swift in Sources */,
+				843904F7285120B4000CE8F7 /* HomeViewModel.swift in Sources */,
 				843904B1284F95CF000CE8F7 /* ViewController.swift in Sources */,
 				843904AD284F95CF000CE8F7 /* AppDelegate.swift in Sources */,
 				843904AF284F95CF000CE8F7 /* SceneDelegate.swift in Sources */,
 				843904E3284F9F15000CE8F7 /* HomeViewController.swift in Sources */,
 				843904E5284FEBCD000CE8F7 /* DetailsViewController.swift in Sources */,
 				843904F228510559000CE8F7 /* Constants.swift in Sources */,
+				843904FD28513111000CE8F7 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
